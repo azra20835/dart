@@ -14,15 +14,24 @@ body {
   font-family: Arial;
 }
 
+
 .board {
   position: relative;
   width: 300px;
   height: 300px;
   border-radius: 50%;
-  border: 8px solid red;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  background:
+    radial-gradient(circle at center,
+  #000 0 20px,
+  #d40000 20px 40px,
+  #000 40px 60px,
+  #1a8f2a 60px 80px,
+  #000 80px 100px,
+  #d40000 100px 120px,
+  #000 120px 150px
+  );
+  border: 6px solid #333;
+  
 }
 
 .board img {
@@ -50,7 +59,27 @@ body {
 }
 </style>
 </head>
+<script>
+const board = document.querySelector('.board');
 
+board.addEventListener('click', (e) => {
+  const rect = board.getBoundingClientRect();
+
+  const x = e.clientX - rect.left;
+  const y = e.clientY - rect.top;
+
+  const arrow = document.createElement('div');
+  arrow.innerText = '➶';
+  arrow.style.position = 'absolute';
+  arrow.style.left = (x - 10) + 'px';
+  arrow.style.top = (y - 10) + 'px';
+  arrow.style.fontSize = '26px';
+  arrow.style.transform = 'rotate(45deg)';
+  arrow.style.pointerEvents = 'none';
+
+  board.appendChild(arrow);
+});
+                                 </script>
 <body>
 <div>
   <div class="board">
